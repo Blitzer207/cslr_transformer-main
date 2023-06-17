@@ -4,15 +4,15 @@ The only one used in the research was image resizing.
 
 """
 
-from multiprocessing import Pool
-from tqdm import tqdm
-import glob
-import cv2
-import re
-import os
+from multiprocessing import Pool # 多进程, 用于加速
+from tqdm import tqdm # 进度条, 用于显示进度
+import glob # 用于查找符合特定规则的文件路径名
+import cv2 # opencv, 用于图像处理 
+import re # 正则表达式, 用于匹配字符串
+import os # 用于操作系统相关的功能. 用于获取文件路径, 文件名等信息
 
 
-def run_mp_cmd(processes, process_func, process_args):
+def run_mp_cmd(processes, process_func, process_args): 
     with Pool(processes) as p:
         outputs = list(
             tqdm(p.imap(process_func, process_args), total=len(process_args))
