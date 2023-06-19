@@ -32,9 +32,11 @@ _info_si5
 _signer_distribution_si5 
     * 数据类型是numpy数组 [Signer04,Singer07,...]
     * 保存的是每个签名者的视频数量，用于后续分析
-PrepareFiles 类返回的是一个numpy数组，包含了整个annotation/manual/train 或者dev或者test的所有信息
-
-每一个数组元素是一个元组（视频的路径，标签，帧数）
+PrepareFiles 类返回的是一个numpy数组，包含了整个annotation/manual/train 或者dev或者test的所有信息，一个数组元素是一个元组（视频的路径，标签，帧数）
+视屏路径：/home/zhengxiawu/work/SLR/data/phoenix2014-release/manual/train/01April_2010_Thursday_heute_default-1/1/*.png
+标签：ICH OSTERN WETTER ZUFRIEDEN MITTAG TEMPERATUR  SUED WARM MEIN NICHT 存储在路径：/home/zhengxiawu/work/SLR/data/phoenix2014-release/annotations/manual/train.corpus.csv
+帧数：/home/zhengxiawu/work/SLR/data/phoenix2014-release/manual/train/01April_2010_Thursday_heute_default-1/1/*.png
+因此，一个视频对应一个句子，一个句子对应一个标签，一个标签对应一个视频文件夹，一个视频文件夹对应多个图片，一个图片对应一帧。
 """
 class PrepareFiles(object):
     """

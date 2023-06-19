@@ -20,9 +20,11 @@ def impute(data: np.ndarray, method: str = "knn") -> np.ndarray:
     :param method: Type of imputation technique to use. knn or iterative
     :param data: input data with missing values
     :return: input with values
+    
+    缺失的值在numpy中用np.nan表示
     """
     imputer = None
-    if method.lower() == "knn":
+    if method.lower() == "knn": 
         imputer = KNNImputer()
         data = imputer.fit_transform(data)
     elif method.lower() == "iterative":
@@ -35,13 +37,16 @@ def impute(data: np.ndarray, method: str = "knn") -> np.ndarray:
         data = imputer.transform(data)
     else:
         raise ValueError("Please provide a valid imputation method. knn or iterative")
+    #将特定条件下的缺失值置为0
+    #第一段代码遍历数据的每一行（除去第一行和最后一行），如果某一行的上一行和下一行的第一个值都为0（精确到小数点后3位），那么就将该行的第一个值设为0。
     for i in range(1, data.shape[0] - 1, 1):
         if (data[i - 1][0], 3) == 0.000 and round(data[i + 1][0], 3) == 0.000:
             data[i][0] = 0.000
-    for row in range(1, data.shape[0] - 1, 1):
+    #如果数据的左上角和右下角的值都为0，那么就将该值设为0,data形状是二维数组 [帧数，特征数]=[n,12]
+    for row in range(1, data.shape[0] - 1, 1): 
         for col in range(1, data.shape[1] - 1, 1):
             if (
-                round(data[row - 1][col - 1], 3) == 0.000
+                round(data[row - 1][col - 1], 3) == 0.000 
                 and round(data[row + 1][col + 1], 3) == 0.000
             ):
                 data[row][col] = 0.000
