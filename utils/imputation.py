@@ -42,7 +42,7 @@ def impute(data: np.ndarray, method: str = "knn") -> np.ndarray:
     for i in range(1, data.shape[0] - 1, 1):
         if (data[i - 1][0], 3) == 0.000 and round(data[i + 1][0], 3) == 0.000:
             data[i][0] = 0.000
-    #如果数据的左上角和右下角的值都为0，那么就将该值设为0,data形状是二维数组 [帧数，特征数]=[n,12]
+    #如果数据的左上角和右下角的值都为0，那么就将该值设为0,data形状是二维数组 [帧数，特征数]=[n,258 or 398]
     for row in range(1, data.shape[0] - 1, 1): 
         for col in range(1, data.shape[1] - 1, 1):
             if (
