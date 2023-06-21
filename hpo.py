@@ -22,6 +22,21 @@ from torchsummary import summary
 from models.aslr import Transformer as T
 from utils.free_memory import free_gpu_cache
 
+'''
+这个超参数优化（HPO）脚本支持使用两种不同的优化方法：SMAC（Sequential Model-based Algorithm Configuration）
+                                            和DEHB（Differential Evolution and Hyperband）。
+
+你可以通过命令行参数 `--hpo_searcher` 来指定使用哪种方法。默认的方法是 SMAC，但你也可以通过将 `--hpo_searcher` 参数设置为 "dehb" 来使用 DEHB 方法。
+
+- SMAC 是一种基于模型的优化方法，它通过构建一个概率模型来预测哪些超参数可能会给出好的结果，然后基于这个模型来选择新的超参数。
+        SMAC 还使用了一种叫做 "intensification" 的过程来在探索（尝试新的超参数）和利用（使用已知的好的超参数）之间进行权衡。
+
+- DEHB 是一种结合了差分进化（Differential Evolution）和 Hyperband 的优化方法。差分进化是一种用于实数函数优化的进化算法，
+        而 Hyperband 是一种基于多臂老虎机的优化方法，用于在有限的预算下找到最优的超参数。
+
+这两种方法都是为了在有限的计算预算下找到最优的超参数，但它们使用的策略和技术是不同的。
+'''
+
 parser = argparse.ArgumentParser(description="Arguments for the HPO script")
 parser.add_argument(
     "--multisigner",
