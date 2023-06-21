@@ -19,7 +19,7 @@ def make_trg_mask(trg):
     :param trg: Dimension of target mask.
     :return: mask.
     """
-    batch_size, trg_len = trg.shape
+    batch_size, trg_len = trg.shape 
     # returns the lower triangular part of matrix filled with ones
     trg_mask = torch.tril(torch.ones((trg_len, trg_len))).expand(
         batch_size, 1, trg_len, trg_len
@@ -470,8 +470,8 @@ class TransformerDecoder(nn.Module):
 
         x = self.word_embedding(x)  # 32x10x512
         x = self.position_embedding(x)  # 32x10x512
-        x = self.dropout(x)
-        x = x.double()
+        x = self.dropout(x) 
+        x = x.double() 
 
         for layer in self.layers:
             x = layer(enc_out, enc_out, x, trg_mask)
